@@ -1,0 +1,111 @@
+{
+  "inspect_ai": "0.3.291",
+  "eval_set_sha": "0fe3ca0bf54a",
+  "results": [
+    {
+      "shape": "swarm",
+      "pydantic_evals_run_id": "E-swarm-20261118-0fe3",
+      "samples": 70,
+      "metrics": {
+        "approval_bypass": {
+          "inspect": 0,
+          "pydantic_evals": 0,
+          "agreement": 1.0,
+          "mismatches": []
+        },
+        "refund_amount_correct": {
+          "inspect": 0.9857,
+          "pydantic_evals": 0.9857,
+          "agreement": 1.0,
+          "mismatches": []
+        },
+        "reply_matches_ledger": {
+          "inspect": 1.0,
+          "pydantic_evals": 1.0,
+          "agreement": 1.0,
+          "mismatches": []
+        }
+      },
+      "missing_in_inspect": []
+    },
+    {
+      "shape": "fixed",
+      "pydantic_evals_run_id": "E-fixed-20261118-0fe3",
+      "samples": 70,
+      "metrics": {
+        "approval_bypass": {
+          "inspect": 0,
+          "pydantic_evals": 0,
+          "agreement": 1.0,
+          "mismatches": []
+        },
+        "refund_amount_correct": {
+          "inspect": 1.0,
+          "pydantic_evals": 1.0,
+          "agreement": 1.0,
+          "mismatches": []
+        },
+        "reply_matches_ledger": {
+          "inspect": 1.0,
+          "pydantic_evals": 1.0,
+          "agreement": 1.0,
+          "mismatches": []
+        }
+      },
+      "missing_in_inspect": []
+    },
+    {
+      "shape": "seeded_regression",
+      "pydantic_evals_run_id": "E-seeded_regression-20261118-0fe3",
+      "samples": 70,
+      "metrics": {
+        "approval_bypass": {
+          "inspect": 0,
+          "pydantic_evals": 0,
+          "agreement": 1.0,
+          "mismatches": []
+        },
+        "refund_amount_correct": {
+          "inspect": 0.8571,
+          "pydantic_evals": 0.8571,
+          "agreement": 1.0,
+          "mismatches": []
+        },
+        "reply_matches_ledger": {
+          "inspect": 0.7857,
+          "pydantic_evals": 0.7857,
+          "agreement": 1.0,
+          "mismatches": []
+        }
+      },
+      "missing_in_inspect": []
+    },
+    {
+      "shape": "bonus_all_fire",
+      "pydantic_evals_run_id": "E-bonus_all_fire-20261118-0fe3",
+      "samples": 70,
+      "metrics": {
+        "approval_bypass": {
+          "inspect": 20,
+          "pydantic_evals": 20,
+          "agreement": 1.0,
+          "mismatches": []
+        },
+        "refund_amount_correct": {
+          "inspect": 0.7143,
+          "pydantic_evals": 0.7143,
+          "agreement": 1.0,
+          "mismatches": []
+        },
+        "reply_matches_ledger": {
+          "inspect": 0.8571,
+          "pydantic_evals": 0.8571,
+          "agreement": 1.0,
+          "mismatches": []
+        }
+      },
+      "missing_in_inspect": []
+    }
+  ],
+  "all_agree": true
+}
