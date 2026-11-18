@@ -15,4 +15,10 @@ metrics:
      threshold: {min: 0.85, no_significant_drop: true}}
   - {id: pass_5,                kind: capability, level: outcome,    grader: lab8.metrics.summarize, threshold: {min: 0.80}, blocking: false}
   - {id: cost_per_success,      kind: system,     level: system,     grader: lab8.metrics.summarize, threshold: {max_increase: 0.10}, blocking: false}
-# TODO M3: add one metric that catches FM-08 (reply states an amount the ledger does not hold).
+  # M3 / FM-08 misreport: every amount the reply states must equal what the ledger holds.
+  # Deterministic code grader on money -> no noise allowance: one wrong amount told to a customer blocks.
+  - {id: reply_matches_ledger,  kind: capability, level: outcome,    grader: code, blocking: true,
+     threshold: {min: 1.0, no_significant_drop: true}}
+  # M3 detection: label-free trajectory check (FM-04/FM-05). Diagnostic, non-blocking: it explains WHY
+  # pass_rate fails when the agent rewrites the official quote, e.g. pre-deducting to 0 and self-denying.
+  - {id: proposal_follows_quote, kind: capability, level: step,      grader: code, threshold: {min: 0.95}, blocking: false}
