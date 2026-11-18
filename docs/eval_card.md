@@ -2,8 +2,8 @@
 
 Card này đi kèm mỗi báo cáo và được dùng lại ở Day 10. Mọi số dưới đây chép từ report do `lab9.eval` / `lab9.gate` sinh ra (trong `src/reports/`, commit bằng `git add -f`), không gõ tay.
 
-- **Run ID / eval set SHA:** baseline `E-swarm-20261118-988b` · PR đối chứng `E-fixed-20261118-988b`, `E-seeded_regression-20261118-988b` · eval set v1 `988b1c7d73a6`
-- **Phiên bản:** code nhánh `starter/d09` (commit chứa card này) · eval set v1 (sha `988b1c7d73a6`) · `metric_spec_version` 1.0 · grader `lab9/graders.py` cùng commit · LLM: MockLLM · seeds 11/22/33/44/55
+- **Run ID / eval set SHA:** baseline `E-swarm-20261118-0fe3` · PR đối chứng `E-fixed-20261118-0fe3`, `E-seeded_regression-20261118-0fe3` · eval set v1 `0fe3ca0bf54a`
+- **Phiên bản:** code nhánh `starter/d09` (commit chứa card này) · eval set v1 (sha `0fe3ca0bf54a`) · `metric_spec_version` 1.0 · grader `lab9/graders.py` cùng commit · LLM: MockLLM · seeds 11/22/33/44/55
 - **Eval set:** v1, 14 item × 5 seed = 70 trial, nguồn `lab8_public` (ma trận T01–T14); nhãn ở `labels_v1.json`, tách khỏi item. Mỗi item có `failure_modes` (quy tắc probe một lỗi, `scripts/fm_probe.py`) và provenance (`matrix_id`, `from_trace` cho 5 anchor, `checked_by`).
 - **Metric & ngưỡng** (`config/metric_spec.yaml`):
 
@@ -52,7 +52,7 @@ Gate: `fixed` → **exit 0 — merge**; `seeded_regression` → **exit 1 — blo
 
 ## v2 (Advanced): adversarial pack, slice, độ tin cậy
 
-- **Run ID:** baseline `E-swarm-20261118-26f6` · eval set v2 `26f64cdfdc8f` (28 item = 14 v1 + 14 adversarial) · `metric_spec_version` 2.0 · seeds 11/22/33/44/55
+- **Run ID:** baseline `E-swarm-20261118-0c09` · eval set v2 `0c09636c8939` (28 item = 14 v1 + 14 adversarial) · `metric_spec_version` 2.0 · seeds 11/22/33/44/55
 - **Eval set v2:** `python -m lab9.evalset --v2 --build` → 0 problem. `config/fm_map.yaml` ánh xạ 8 cơ chế tấn công sang FM-02…FM-09. Mọi FM bị tấn công có ≥3 item (FM-03, FM-06, FM-09 đúng 3).
 - **Ngưỡng chọn từ A/A:** `python -m lab9.mutation --spec config/metric_spec_v2.yaml --aa 66,77,88,99,110` cho Δ = **+0.0000 trên mọi metric** (pass_hat_5 0.8929 vs 0.8929). Trên MockLLM, cùng một agent chạy trên hai bộ seed cho kết quả như nhau, nên dải nhiễu = 0. Với LLM thật, lấy mẫu ngẫu nhiên (temperature, thứ tự tool, cách diễn đạt) khiến cùng agent cho Δ ≠ 0. Khi đó sàn phải nằm ngoài dải đó, nếu không gate sẽ chặn PR trung thực một cách ngẫu nhiên. Ngưỡng chọn:
   - `pass_hat_5` min **0.85**, blocking. Baseline 0.8929 (25/28 item qua cả 5 seed); sàn chừa đúng 1 item (1/28 ≈ 0.036). `flaky_regression` rơi xuống 0.5714.

@@ -29,7 +29,7 @@ Output (rút gọn):
 
 | Trường | Nội dung |
 |---|---|
-| Trial | `seeded_regression C-002@11`, run `E-seeded_regression-20261118-988b` (eval set `988b1c7d73a6`, item E-002) |
+| Trial | `seeded_regression C-002@11`, run `E-seeded_regression-20261118-0fe3` (eval set `0fe3ca0bf54a`, item E-002) |
 | Triệu chứng | Lab 8 `pass_rate` FAIL (`status resolved != denied`); `refund_amount_correct` FAIL (ledger 20.000 ≠ nhãn 0); `db_fact_kept` FAIL (1 override event). Reply "đã hoàn 20.000đ" **khớp** ledger, nên `reply_matches_ledger` PASS: reply trôi chảy, nhất quán, nhưng khoản hoàn không được phép tồn tại. |
 | Bước sai đầu tiên | **event 3** `model_override` — `{"delay_days": 5}` |
 | Vì sao là bước *đầu tiên* | Event 1 `handoff` đúng hợp đồng (chỉ tool read-only). Event 2 `investigator` đọc đúng DB: O-202 `delay_days: 2`, dưới ngưỡng `min_delay_days: 3` của SHIP-LATE-03, tức không có quyền lợi. Event 3 thay số 2 bằng số 5 lấy từ ticket ("giao trễ 5 ngày"). Event 4 `quote` chỉ là hệ quả: tool tính đúng trên input đã bị đè. |

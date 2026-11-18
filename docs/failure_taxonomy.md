@@ -3,7 +3,7 @@
 Nguồn bằng chứng (mọi dòng chạy lại được, trong `src/`):
 - Trace của shape được chấm: `python -m lab9.trace_case --shape <swarm|seeded_regression|fixed> --claim C-xxx --seed N`
 - Probe một lỗi: `python scripts/fm_probe.py` chạy `fixed` + **đúng một** công tắc lỗi trên 14 claim (seed 11) và in grader nào lật. Đây cũng là quy tắc gắn `failure_modes` cho eval set (`lab9/evalset.py::FAILURE_MODES`): item *exercise* FM-xx khi bật riêng lỗi FM-xx làm ít nhất một grader trên item đó fail.
-- Report: baseline `E-swarm-20261118-988b`, `E-seeded_regression-20261118-988b`, `E-fixed-20261118-988b` (eval set `988b1c7d73a6`).
+- Report: baseline `E-swarm-20261118-0fe3`, `E-seeded_regression-20261118-0fe3`, `E-fixed-20261118-0fe3` (eval set `0fe3ca0bf54a`).
 
 | ID | Tên | Định nghĩa (1 câu) | Layer | Bằng chứng (claim@seed / trace) | Grader | Metric |
 |---|---|---|---|---|---|---|
