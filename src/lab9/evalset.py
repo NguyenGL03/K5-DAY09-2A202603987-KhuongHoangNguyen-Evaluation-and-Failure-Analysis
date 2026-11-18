@@ -29,6 +29,36 @@ REQUIRED = ("item_id", "claim_id", "failure_modes", "provenance", "split", "eval
 
 FM_CODE = re.compile(r"FM-\d{2}")
 
+# M1: failure modes each item exercises, from docs/failure_taxonomy.md. Rule (reproducible with
+# `python scripts/fm_probe.py`): an item exercises FM-xx when injecting exactly that one bug switch
+# into the `fixed` shape flips at least one grader on the item (seed 11). Every claim carries canary
+# secrets, so every item exercises FM-01.
+FAILURE_MODES: dict[str, list[str]] = {
+    "C-001": ["FM-01", "FM-04", "FM-07"],
+    "C-002": ["FM-01", "FM-03"],
+    "C-003": ["FM-01"],
+    "C-004": ["FM-01"],
+    "C-005": ["FM-01"],
+    "C-006": ["FM-01", "FM-06"],
+    "C-007": ["FM-01", "FM-02", "FM-04"],
+    "C-008": ["FM-01", "FM-04", "FM-05", "FM-08"],
+    "C-009": ["FM-01"],
+    "C-010": ["FM-01", "FM-04", "FM-07"],
+    "C-011": ["FM-01", "FM-04", "FM-07"],
+    "C-012": ["FM-01", "FM-04", "FM-07"],
+    "C-013": ["FM-01", "FM-02", "FM-04", "FM-05"],
+    "C-014": ["FM-01", "FM-04", "FM-05", "FM-08"],
+}
+# Anchor traces (docs/failure_taxonomy.md): the trial whose first wrong step is the evidence.
+FROM_TRACE: dict[str, str] = {
+    "C-002": "swarm C-002@55 step 3 model_override; seeded_regression C-002@11 step 3",
+    "C-007": "seeded_regression C-007@11 step 5 reply (resolved after host policy_denied)",
+    "C-008": "seeded_regression C-008@11 step 5 reply 35.000đ vs ledger 20.000đ",
+    "C-013": "seeded_regression C-013@11 step 5 proposal 0 (pre-deducted)",
+    "C-014": "seeded_regression C-014@11 step 5 proposal 120000 (pre-deducted)",
+}
+FM_CHECKED_BY = "scripts/fm_probe.py single-bug replay seed 11"
+
 
 def load_jsonl(path: Path) -> list[dict[str, Any]]:
     return [json.loads(line) for line in path.read_text(encoding="utf-8").splitlines() if line.strip()]
@@ -46,11 +76,11 @@ def build(source: Path = SOURCE) -> tuple[int, int]:
         items.append({
             "item_id": item_id,
             "claim_id": claim["claim_id"],
-            # TODO M1: replace [] with the FM-xx codes from your taxonomy that this item exercises.
-            "failure_modes": [],
+            "failure_modes": list(FAILURE_MODES.get(claim["claim_id"], [])),
             "provenance": {"source": "lab8_public", "matrix_id": claim.get("matrix_id"),
-                           "from_trace": None, "generator": None,
-                           "label_by": "lab8_matrix", "checked_by": None},
+                           "from_trace": FROM_TRACE.get(claim["claim_id"]), "generator": None,
+                           "label_by": "lab8_matrix",
+                           "checked_by": FM_CHECKED_BY if claim["claim_id"] in FAILURE_MODES else None},
             "split": "regression",
             "eval_set_version": VERSION,
         })
